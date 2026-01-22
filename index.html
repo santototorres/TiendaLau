@@ -3,210 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Pinky | Accesorios y Moda</title>
+    <title>After Rollers | Ride your vibe</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
+        :root {
+            --metallic-green: #059669;
+            --neon-green: #10b981;
+            --dark-metal: #020617;
         }
-        .pinky-gradient {
-            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        .hero-bg { background: linear-gradient(135deg, #020617 0%, #064e3b 100%); }
+        .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-10px); box-shadow: 0 25px 30px -10px rgba(16, 185, 129, 0.2); }
+        .img-container { background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; height: 280px; position: relative; }
+        .product-image { width: 100%; height: 100%; object-fit: contain; padding: 25px; transition: transform 0.6s ease; }
+        .card-hover:hover .product-image { transform: scale(1.1); }
+        
+        .category-tag { 
+            background: rgba(16, 185, 129, 0.1); 
+            color: #059669; 
+            padding: 4px 12px; 
+            border-radius: 8px; 
+            font-size: 0.65rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em;
+            display: inline-block;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px -10px rgba(219, 39, 119, 0.3);
+        
+        .skeleton { 
+            background: linear-gradient(90deg, #f1f5f9 25%, #ecfdf5 50%, #f1f5f9 75%); 
+            background-size: 200% 100%; 
+            animation: shimmer 1.5s infinite; 
         }
-        .btn-pinky {
-            background-color: #db2777;
-            transition: all 0.3s ease;
-        }
-        .btn-pinky:hover {
-            background-color: #be185d;
-            transform: scale(1.02);
-        }
-        .img-container {
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 10px;
-        }
-        html {
-            scroll-behavior: smooth;
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        .brand-logo { height: 45px; width: auto; object-fit: contain; }
+        
+        .text-glow {
+            text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-slate-50 text-slate-900">
 
-    <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-pink-100">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-heart text-pink-500 text-2xl"></i>
-                <h1 class="text-2xl font-bold text-pink-600 tracking-tight">Tienda Pinky</h1>
+    <!-- Navegación -->
+    <header class="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-emerald-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://drive.google.com/thumbnail?id=1HGJZCxe1glvF4w4-gw75Z-dexb3oeXY5&sz=w200" alt="After Rollers Logo" class="brand-logo">
+                <h1 class="text-2xl font-black text-slate-900 tracking-tighter uppercase italic ml-2">After <span class="text-emerald-600">Rollers</span></h1>
             </div>
-            <nav class="hidden md:flex gap-8">
-                <a href="#accesorios" class="text-gray-600 hover:text-pink-500 font-semibold transition">Accesorios</a>
-                <a href="#vestimenta" class="text-gray-600 hover:text-pink-500 font-semibold transition">Vestimenta</a>
-            </nav>
+            <div class="flex items-center gap-4">
+                <span id="item-count" class="hidden md:inline-block bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-emerald-100">
+                    Sincronizando...
+                </span>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <div class="pinky-gradient py-16 px-4 text-center">
-        <h2 class="text-4xl md:text-6xl font-extrabold text-pink-900 mb-4">Tu estilo, tu elección</h2>
-        <p class="text-pink-700 text-xl max-w-2xl mx-auto font-light">Explora nuestro catálogo exclusivo de accesorios y ropa deportiva con imágenes actualizadas.</p>
+    <section class="hero-bg py-24 px-6 text-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center">
+            <span class="text-[20vw] font-black tracking-tighter select-none">VIBE</span>
+        </div>
+        
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-block bg-emerald-500 text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-[0.3em] mb-6 animate-pulse shadow-lg shadow-emerald-500/20">Chrome Collection</div>
+            <h2 class="text-6xl md:text-8xl font-black mb-4 leading-none tracking-tighter uppercase italic text-glow">Ride <span class="text-emerald-400 italic">your vibe</span></h2>
+            <p class="text-emerald-100/60 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                Potencia tu ruta con el estilo único de After Rollers. Tecnología aplicada al diseño sobre ruedas.
+            </p>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <div class="max-w-7xl mx-auto px-6 -mt-8 relative z-20">
+        <div class="bg-white p-6 rounded-[2rem] shadow-xl border border-emerald-50">
+            <div class="flex items-center gap-2 mb-4 text-slate-400">
+                <i class="fa-solid fa-layer-group text-xs text-emerald-500"></i>
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Categorías Disponibles</span>
+            </div>
+            <div id="filter-container" class="flex flex-wrap gap-2">
+                <div class="skeleton w-24 h-10 rounded-xl"></div>
+                <div class="skeleton w-24 h-10 rounded-xl"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 py-12">
-        
-        <!-- Section: Accesorios Estéticos -->
-        <section id="accesorios" class="mb-20">
-            <div class="flex items-center justify-between mb-10 border-b border-pink-200 pb-4">
-                <div class="flex items-center gap-3">
-                    <span class="bg-pink-600 text-white p-3 rounded-2xl shadow-lg shadow-pink-200">
-                        <i class="fa-solid fa-gem text-xl"></i>
-                    </span>
-                    <h2 class="text-3xl font-bold text-gray-800 tracking-tight">Accesorios Estéticos</h2>
-                </div>
-            </div>
-            <div id="accessories-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Injected via JS -->
-            </div>
-        </section>
-
-        <!-- Section: Vestimenta -->
-        <section id="vestimenta" class="mb-20">
-            <div class="flex items-center justify-between mb-10 border-b border-pink-200 pb-4">
-                <div class="flex items-center gap-3">
-                    <span class="bg-pink-600 text-white p-3 rounded-2xl shadow-lg shadow-pink-200">
-                        <i class="fa-solid fa-shirt text-xl"></i>
-                    </span>
-                    <h2 class="text-3xl font-bold text-gray-800 tracking-tight">Vestimenta y Deporte</h2>
-                </div>
-            </div>
-            <div id="clothing-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Injected via JS -->
-            </div>
-        </section>
-
+    <!-- Grilla de Productos -->
+    <main class="max-w-7xl mx-auto px-6 py-16">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+            <div class="skeleton h-[500px] rounded-[3rem]"></div>
+            <div class="skeleton h-[500px] rounded-[3rem]"></div>
+            <div class="skeleton h-[500px] rounded-[3rem]"></div>
+            <div class="skeleton h-[500px] rounded-[3rem]"></div>
+        </div>
     </main>
 
-    <footer class="bg-white border-t border-pink-100 py-12 text-center">
-        <div class="mb-6">
-            <i class="fa-solid fa-heart text-pink-600 text-3xl"></i>
+    <footer class="bg-slate-950 py-20 text-center mt-20 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col items-center gap-6">
+                <img src="https://drive.google.com/thumbnail?id=1HGJZCxe1glvF4w4-gw75Z-dexb3oeXY5&sz=w200" alt="Logo" class="h-16 brightness-0 invert opacity-80">
+                <h3 class="text-3xl font-black tracking-tighter uppercase italic">After <span class="text-emerald-500">Rollers</span></h3>
+                <p class="text-emerald-400 text-[10px] font-bold uppercase tracking-[0.4em] -mt-4 mb-4 italic">Ride your vibe</p>
+                <div class="flex justify-center gap-10 text-2xl mt-4">
+                    <a href="#" class="text-slate-500 hover:text-emerald-400 transition-all"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-slate-500 hover:text-emerald-400 transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+                <p class="text-[10px] text-slate-600 font-bold uppercase tracking-[0.5em] mt-8">Bogotá • Colombia</p>
+            </div>
         </div>
-        <p class="font-bold text-2xl text-pink-600 mb-2">Tienda Pinky</p>
-        <p class="text-gray-500 text-sm">Referencias e imágenes vinculadas directamente al archivo oficial.</p>
     </footer>
 
     <script>
-        const accessoriesProducts = [
-            { name: "1 par de cordones Led (Multicolor)", price: 31142, ref: "QC6229515", rating: 4.8, img: "https://img.kwcdn.com/product/fancy/e69258b1-b5b4-4e21-ad5d-e57fcdfbeb91.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Led de zapato colorida", price: 24874, ref: "4QM295K270", rating: 4.5, img: "https://img.kwcdn.com/product/open/6e287daa4b114ebda6eeccd1b1ed5e54-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Pulsera luminosa", price: 16051, ref: "TV186437", rating: 4.2, img: "https://img.kwcdn.com/product/fancy/07dc7693-1e55-49d1-8197-69047a93b113.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "10 moñas para el cabello luminosas", price: 83585, ref: "BF552918", rating: 4.9, img: "https://img.kwcdn.com/product/fancy/75598529-04f6-441a-9ae9-1db2b3d2c350.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "1 par de cordones Led (Escoge color)", price: 37529, ref: "XP1247877", rating: 4.6, img: "" },
-            { name: "Diadema luminosa con gemas", price: 40918, ref: "AH3325837", rating: 4.7, img: "https://img.kwcdn.com/product/fancy/cf54d8af-b99c-4b64-94d3-34c771e1b4b4.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Bola de peluche para casco", price: 37166, ref: "XA12829704", rating: 4.3, img: "https://img.kwcdn.com/product/aisc_image/algo/opt/AVrcC9bfcbf01e8e244fd8f9ebe9230eef56d-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Paquete moño y cuernitos casco", price: 57783, ref: "KA10630420", rating: 4.8, img: "https://img.kwcdn.com/product/open/f10accb52d0546018dff8197764b4d41-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "4 cuernos de diablito para casco", price: 20527, ref: "FK5209435", rating: 4.5, img: "https://img.kwcdn.com/product/open/e9a0d97cd745499ea966aa895a91b1b8-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Cuernos de diablo alargados", price: 24067, ref: "TL3674424", rating: 4.6, img: "https://img.kwcdn.com/product/open/7942275320114e6688868e2f8c075bd8-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Orejas de zorro para casco", price: 39101, ref: "XJ11313470", rating: 4.9, img: "https://img.kwcdn.com/product/fancy/723931cb-0c57-4751-b437-4c8e96ed62d8.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Cuernitos de diablo con piedritas", price: 23888, ref: "RM11292690", rating: 4.4, img: "" },
-            { name: "Orejas de gato con luz led", price: 34004, ref: "BP12153435", rating: 4.7, img: "https://img.kwcdn.com/product/open/d22d4f9c2562487bad30730a2ce2dfa1-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Decoración rana esquinas (3 piezas)", price: 64296, ref: "WU4906161", rating: 4.5, img: "https://img.kwcdn.com/product/fancy/bd756036-b325-47d6-bec3-d0961cf6941d.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Alas de murciélago", price: 14819, ref: "ET1426777", rating: 4.3, img: "https://img.kwcdn.com/product/fancy/24e6c418-c3a0-43e8-bca9-c7ed8541999c.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Decoración PULPO esquinas (3 piezas)", price: 43940, ref: "QC10735435", rating: 4.6, img: "https://img.kwcdn.com/product/fancy/dcd38d60-9dad-48e8-9cf4-a8ba7e7abd96.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Linterna inalámbrica USB", price: 44179, ref: "DK12800161", rating: 4.8, img: "https://img.kwcdn.com/product/open/1f8d64860f5043cb91d77bd16f6609f7-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Pulsera led running USB", price: 36286, ref: "WR1376235", rating: 4.5, img: "https://img.kwcdn.com/product/fancy/1c65953f-ca6a-427c-89b9-a2529aa1999d.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Cubierta impermeable mochila", price: 16326, ref: "HK9396441", rating: 4.2, img: "https://img.kwcdn.com/product/fancy/aab67d73-28c9-4492-8f04-82917e91f41b.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Gancho para cargar patines", price: 12958, ref: "KB8342424", rating: 4.4, img: "https://img.kwcdn.com/product/fancy/0ef054b5-fd7e-4871-9a26-d9cd391c4088.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Cubre zapatos para patines", price: 36213, ref: "BK9330685", rating: 4.6, img: "https://img.kwcdn.com/product/open/b727da43aade4b71a4f299b9d4f52a6f-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Kit rodilleras, muñequeras, coderas", price: 116986, ref: "BY77596", rating: 4.9, img: "https://img.kwcdn.com/product/fancy/c5780035-c4bc-40ad-be19-766e80653bf7.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Linterna corporal ajustable", price: 42013, ref: "JJ6576089", rating: 4.7, img: "https://img.kwcdn.com/product/fancy/488fa7c5-433a-4b5b-bf21-cb8ec7334470.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Orejas de conejo para casco", price: 27744, ref: "VB825192", rating: 4.8, img: "https://img.kwcdn.com/product/fancy/808c64f9-2c86-407f-8518-ab7c360b2824.jpg?imageView2/2/w/1300/q/90/format/avif" }
-        ];
+        const TSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAw27anU0ZGKtMHKaFA4rJqQLMuAxDMflvC9h7SrVXZjkyfUPu1Mxw3ZHNguoLu9YmQPkNBg-b4iBw/pub?gid=0&single=true&output=tsv';
+        
+        let productsDB = [];
 
-        const clothingProducts = [
-            { name: "Cintura deportiva porta botella", price: 48651, ref: "XX3410388", rating: 4.8, img: "https://img.kwcdn.com/product/fancy/15dc26a6-b8c7-4ca2-90fc-da53d7ea17d7.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Gancho porta botellas aire libre", price: 41321, ref: "LC2671300", rating: 4.5, img: "https://img.kwcdn.com/product/open/ccfb732c28cd4d0abb45f866104b4d7f-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Bolsa cintura transparente", price: 39607, ref: "LY12899959", rating: 4.6, img: "https://img.kwcdn.com/product/fancy/f787fc6f-5697-402f-b6f8-775da7fd709b.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Riñonera running delgada", price: 28450, ref: "JL245619", rating: 4.7, img: "https://img.kwcdn.com/product/open/2024-08-09/1723211653338-f3c5bc8f68814d9b95b0b9ee6654d866-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Bolso de pecho", price: 36038, ref: "AD2284898", rating: 4.4, img: "no image" },
-            { name: "Bolsa cintura agarre pierna", price: 50360, ref: "FR748335", rating: 4.9, img: "no image" },
-            { name: "Impermeables desechables (2 bolas)", price: 12285, ref: "HE7125360", rating: 4.2, img: "https://img.kwcdn.com/product/open/4806ef94026b464dad1fe2186c82a825-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Bolso pecho hombre Premium", price: 133291, ref: "CT50968", rating: 4.8, img: "https://img.kwcdn.com/product/fancy/e0e7db95-f789-4d0f-91e4-861d5e9e3589.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Bolso de pecho hombre Sport", price: 59355, ref: "FG1953188", rating: 4.5, img: "https://img.kwcdn.com/product/fancy/d6316ffa-bc68-4bfd-b9a9-796a2a3c3138.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Funda deportiva para brazo", price: 15459, ref: "RQ13086974", rating: 4.3, img: "https://img.kwcdn.com/product/fancy/23598dd7-784a-46f4-8413-0f466abd69e0.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Botella agua para muñeca", price: 29393, ref: "KH5052972", rating: 4.6, img: "https://img.kwcdn.com/product/fancy/74a29b0e-9f98-4b40-b475-58f0d1f57a6b.jpg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Funda protectora para ruedas", price: 26738, ref: "PR12827140", rating: 4.4, img: "https://img.kwcdn.com/product/open/3db609b7d79642338af19c9c84834b91-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Toallas deportiva con funda", price: 20665, ref: "TL11652301", rating: 4.7, img: "https://img.kwcdn.com/product/open/ba458a2dd1144260afa72179c6d30c1d-goods.jpeg?imageView2/2/w/1300/q/90/format/avif" },
-            { name: "Calcetas para patinaje", price: 34854, ref: "KR3319522", rating: 4.8, img: "https://img.kwcdn.com/product/fancy/5a98e509-adb2-40ab-83f7-43a362b11f0a.jpg?imageView2/2/w/1300/q/90/format/avif" }
-        ];
-
-        function formatPrice(price) {
-            return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(price);
-        }
-
-        function createStarRating(rating) {
-            let starsHtml = '';
-            for (let i = 1; i <= 5; i++) {
-                if (i <= rating) starsHtml += '<i class="fa-solid fa-star text-yellow-400 text-xs"></i>';
-                else starsHtml += '<i class="fa-regular fa-star text-gray-200 text-xs"></i>';
+        async function init() {
+            try {
+                const response = await fetch(TSV_URL);
+                const text = await response.text();
+                parseTSV(text);
+            } catch (err) {
+                console.error('Error al cargar la hoja:', err);
+                document.getElementById('item-count').innerText = "ERROR DE CONEXIÓN";
             }
-            return `<div class="flex items-center gap-1 mb-2">${starsHtml} <span class="text-xs text-gray-400 font-bold ml-1">${rating}</span></div>`;
         }
 
-        function createCard(product) {
-            const temuSearchUrl = `https://www.temu.com/search_result.html?search_key=${product.ref}`;
-            const isNoImage = product.img === "no image";
-            const imageUrl = isNoImage 
-                ? `https://placehold.co/600x400/fdf2f8/db2777?text=Imagen+Próximamente` 
-                : product.img;
+        function parseTSV(tsv) {
+            const rows = tsv.split(/\r?\n/);
+            const items = [];
+            const cats = new Set();
 
-            return `
-            <div class="bg-white rounded-3xl shadow-sm border border-pink-50 overflow-hidden card-hover flex flex-col h-full transition-all duration-300">
-                <div class="relative w-full h-64 img-container p-4 group">
-                    <img src="${imageUrl}" alt="${product.name}" class="product-image transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/fdf2f8/db2777?text=Sin+Imagen'">
-                    <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm text-pink-600 px-3 py-1 rounded-full text-[10px] font-bold shadow-sm border border-pink-100 uppercase tracking-tighter">
-                        REF: ${product.ref}
-                    </div>
-                </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-bold text-gray-800 text-lg leading-tight mb-2 line-clamp-2 min-h-[3rem]">${product.name}</h3>
-                    ${createStarRating(product.rating)}
-                    <div class="mt-auto flex items-end justify-between pt-4">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] uppercase text-gray-400 font-bold tracking-widest mb-1">Precio Unitario</span>
-                            <span class="text-2xl font-black text-pink-600 leading-none">${formatPrice(product.price)}</span>
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (!row.trim()) continue;
+
+                const cols = row.split('\t');
+                
+                const name = cols[0]?.trim();
+                if (!name) continue;
+
+                const ref = cols[1]?.trim() || "N/A";
+                const productUrl = cols[2]?.trim() || "#";
+                const img = cols[3]?.trim() || "";
+                
+                const rawRating = cols[4]?.trim().replace(',', '.');
+                const rating = rawRating ? parseFloat(rawRating).toFixed(1) : "5.0";
+                
+                let priceText = cols[5] || "0";
+                let priceVal = parseInt(priceText.replace(/[^\d]/g, '')) || 0;
+
+                let cat = cols[6]?.trim() || "General";
+
+                items.push({ name, ref, productUrl, img, rating, price: priceVal, cat });
+                cats.add(cat);
+            }
+
+            productsDB = items;
+            renderFilters(Array.from(cats));
+            renderProducts(productsDB);
+        }
+
+        function formatMoney(val) {
+            return new Intl.NumberFormat('es-CO', { 
+                style: 'currency', 
+                currency: 'COP', 
+                maximumFractionDigits: 0 
+            }).format(val);
+        }
+
+        function renderFilters(categories) {
+            const container = document.getElementById('filter-container');
+            let html = `<button onclick="filterItems('all')" class="filter-btn active bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-emerald-200 transition-all">Todos</button>`;
+            
+            categories.sort().forEach(c => {
+                html += `<button onclick="filterItems('${c}')" class="filter-btn bg-slate-50 text-slate-500 border border-slate-100 hover:border-emerald-200 hover:text-emerald-600 px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all">${c}</button>`;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function renderProducts(data) {
+            const grid = document.getElementById('product-grid');
+            const count = document.getElementById('item-count');
+            
+            grid.innerHTML = data.map(item => {
+                const imgDisplay = (!item.img || item.img === "no image") 
+                    ? 'https://placehold.co/600x600/f0fdf4/059669?text=After+Rollers' 
+                    : item.img;
+
+                return `
+                    <div class="bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 card-hover flex flex-col h-full group">
+                        <div class="img-container">
+                            <div class="absolute top-6 right-6 flex items-center gap-1 bg-white/90 backdrop-blur px-3 py-1 rounded-full shadow-sm z-10 border border-emerald-50">
+                                <i class="fa-solid fa-star text-emerald-400 text-[10px]"></i>
+                                <span class="text-[10px] font-black text-slate-700">${item.rating}</span>
+                            </div>
+                            <img src="${imgDisplay}" alt="${item.name}" class="product-image" onerror="this.src='https://placehold.co/600x600/f0fdf4/059669?text=After+Rollers'">
                         </div>
-                        <a href="${temuSearchUrl}" target="_blank" class="btn-pinky text-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg shadow-pink-100" title="Ver en Temu">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </a>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <!-- Nueva Distribución Solicitada -->
+                            <div class="mb-6">
+                                <h3 class="text-xl font-black text-slate-800 leading-tight tracking-tight uppercase italic line-clamp-2 mb-2">${item.name}</h3>
+                                <p class="text-3xl font-black text-emerald-600 leading-none mb-3">${formatMoney(item.price)}</p>
+                                <span class="category-tag">${item.cat}</span>
+                            </div>
+
+                            <div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-[8px] font-black text-slate-300 uppercase tracking-widest">Referencia</span>
+                                    <span class="text-[10px] font-mono font-bold text-slate-500">${item.ref}</span>
+                                </div>
+                                <a href="${item.productUrl}" target="_blank" class="w-12 h-12 bg-slate-950 text-white rounded-2xl flex items-center justify-center hover:bg-emerald-600 transition-all shadow-lg active:scale-90 group-hover:-rotate-3">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            `;
+                `;
+            }).join('');
+            
+            count.innerText = `${data.length} ÍTEMS ACTUALIZADOS`;
         }
 
-        function renderGrid(containerId, products) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = products.map(product => createCard(product)).join('');
+        function filterItems(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if(btn.innerText.toLowerCase() === category.toLowerCase() || (category === 'all' && btn.innerText.toLowerCase() === 'todos')) {
+                    btn.className = "filter-btn bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-emerald-200 transition-all";
+                } else {
+                    btn.className = "filter-btn bg-slate-50 text-slate-500 border border-slate-100 hover:border-emerald-200 hover:text-emerald-600 px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all";
+                }
+            });
+
+            if (category === 'all') {
+                renderProducts(productsDB);
+            } else {
+                const filtered = productsDB.filter(p => p.cat === category);
+                renderProducts(filtered);
+            }
         }
 
-            renderGrid('accessories-grid', accessoriesProducts);
-            renderGrid('clothing-grid', clothingProducts);
+        window.onload = init;
     </script>
 </body>
 </html>
